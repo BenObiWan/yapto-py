@@ -2,10 +2,15 @@
 
 import os
 
+global prog, finished
+
+prog='prog'
+finished='finished'
+
 #recursively list directories to scan
 def listDir(stack, path):
   for entry in os.scandir(path):
-    if entry.is_dir():
+    if entry.is_dir() and not (entry.name == prog or entry.name == finished):
       stack.append(entry.path)
       listDir(stack, entry.path)
 
