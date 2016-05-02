@@ -1,11 +1,15 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 
 import os
 
+#global vars
 global prog, finished
-
-prog='prog'
+prog='progress'
 finished='finished'
+
+#non global vars
+path='/mnt/mfs/images/photos/'
+stack=[]
 
 #recursively list directories to scan
 def listDir(stack, path):
@@ -25,9 +29,7 @@ def scanDir(path):
 #def scanFile(path):
   #do stuff 
 
-path='/mnt/mfs/images/photos/'
-stack=[]
-
+#main program
 listDir(stack, path)
 
 while stack:
