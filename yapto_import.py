@@ -27,9 +27,19 @@ def scanDir(path):
     if entry.is_file():
       scanFile(entry)
 
+#scan a file
 def scanFile(path):
   if not path.name.lower().endswith(('.png', '.jpg', '.jpeg', '.jpe', '.cr2', '.bmp', '.tga')):
     if not path.name.lower().endswith(('.m2ts', '.cont', '.tmb', '.cont', '.mov', '.sh', '.sh~', '.mp4', '.mts', '.m4v', '.pmpd', '.xmp', '.avi', '.thm', '.mod', '.moi', '.wmv', '.mpg')):
+      #calc id SHA-256
+      #check if id already exists
+      #if present only add the tags to the existing picture
+      #if not present continue
+      #identify picture
+      #copy the file
+      #insert data into DB
+      #create thumbnail
+      #create display picture if raw
       print(path.path)
 
 #main program
