@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import hashlib
 
 #global vars
 global prog, finished
@@ -29,18 +30,24 @@ def scanDir(path):
 
 #scan a file
 def scanFile(path):
-  if not path.name.lower().endswith(('.png', '.jpg', '.jpeg', '.jpe', '.cr2', '.bmp', '.tga')):
-    if not path.name.lower().endswith(('.m2ts', '.cont', '.tmb', '.cont', '.mov', '.sh', '.sh~', '.mp4', '.mts', '.m4v', '.pmpd', '.xmp', '.avi', '.thm', '.mod', '.moi', '.wmv', '.mpg')):
-      #calc id SHA-256
-      #check if id already exists
-      #if present only add the tags to the existing picture
-      #if not present continue
-      #identify picture
-      #copy the file
-      #insert data into DB
-      #create thumbnail
-      #create display picture if raw
-      print(path.path)
+  if path.name.lower().endswith(('.png', '.jpg', '.jpeg', '.jpe', '.cr2', '.bmp', '.tga')):
+    #if not path.name.lower().endswith(('.m2ts', '.cont', '.tmb', '.cont', '.mov', '.sh', '.sh~', '.mp4', '.mts', '.m4v', '.pmpd', '.xmp', '.avi', '.thm', '.mod', '.moi', '.wmv', '.mpg')):
+    #calc id SHA-256
+    fileHasher = hashlib.sha256()
+    with open(path.path, "rb") as f:
+      for chunk in iter(lambda: f.read(4096), b""):
+        fileHasher.update(chunk)
+    fileHash=fileHasher.hexdigest()
+
+    #check if id already exists
+    #if present only add the tags to the existing picture
+    #if not present continue
+    #identify picture
+    #copy the file
+    #insert data into DB
+    #create thumbnail
+    #create display picture if raw
+    print(path.path + ' ' + fileHash)
 
 #main program
 listDir(stack, path)
